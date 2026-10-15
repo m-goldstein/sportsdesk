@@ -116,7 +116,7 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
         <span>
           <Activity size={13} /> Probability construction
         </span>
-        <span className="green">{pct(prediction.home, 1)} home</span>
+        <span className="accent-text">{pct(prediction.home, 1)} home</span>
       </div>
       <svg
         viewBox="0 0 360 170"
@@ -125,8 +125,8 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
       >
         <defs>
           <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#c1f879" stopOpacity=".22" />
-            <stop offset="100%" stopColor="#c1f879" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--accent)" stopOpacity=".22" />
+            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
           </linearGradient>
         </defs>
         {[0.25, 0.5, 0.75].map((p) => (
@@ -136,10 +136,10 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
               x2="325"
               y1={145 - p * 125}
               y2={145 - p * 125}
-              stroke="#29312e"
+              stroke="var(--line)"
               strokeDasharray="3 5"
             />
-            <text x="334" y={149 - p * 125} fill="#768079" fontSize="9">
+            <text x="334" y={149 - p * 125} fill="var(--muted)" fontSize="9">
               {p * 100}%
             </text>
           </g>
@@ -151,7 +151,7 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
         <polyline
           points={coords.join(" ")}
           fill="none"
-          stroke="#c1f879"
+          stroke="var(--accent)"
           strokeWidth="2.5"
           strokeLinejoin="round"
         />
@@ -161,8 +161,8 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
             cx={30 + i * 95}
             cy={145 - p * 125}
             r="3.5"
-            fill="#c1f879"
-            stroke="#17201b"
+            fill="var(--accent)"
+            stroke="var(--panel)"
             strokeWidth="2"
           />
         ))}
@@ -171,7 +171,7 @@ export function ModelChart({ prediction }: { prediction: Forecast }) {
             key={t}
             x={30 + i * 95}
             y="167"
-            fill="#8b968d"
+            fill="var(--muted)"
             fontSize="10"
             textAnchor="middle"
           >

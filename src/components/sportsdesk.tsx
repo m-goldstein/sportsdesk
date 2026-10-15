@@ -440,7 +440,7 @@ export function Sportsdesk({
             s<span />
           </span>
           <span>
-            sportsdesk<span className="green">.</span>
+            sportsdesk<span className="accent-text">.</span>
           </span>
         </a>
         <div className="workspace-label">
@@ -575,7 +575,7 @@ export function Sportsdesk({
           <div className="page-heading">
             <div>
               <div className="eyebrow">
-                <span className="green">THE SPORTS INTELLIGENCE WORKSPACE</span>
+                <span className="accent-text">THE SPORTS INTELLIGENCE WORKSPACE</span>
                 <span className="heading-slash">/</span>
                 {when(`${date}T12:00:00-04:00`, {
                   weekday: "long",
@@ -856,7 +856,7 @@ export function Sportsdesk({
                                 <span className={favorite ? "lean" : "muted"}>
                                   {favorite ? (
                                     <>
-                                      <span className="green">↗</span>{" "}
+                                      <span className="accent-text">↗</span>{" "}
                                       {favorite.abbr}
                                     </>
                                   ) : (
@@ -973,7 +973,7 @@ export function Sportsdesk({
                       )}
                       <div className="intelligence-read">
                         <span className="eyebrow">
-                          <span className="green">✳</span> THE RESEARCH READ
+                          <span className="accent-text">✳</span> THE RESEARCH READ
                         </span>
                         <p>{pick.reasons[0]}</p>
                         <div>
@@ -1451,7 +1451,7 @@ export function Sportsdesk({
         <div className="brief-body">
           <div className="eyebrow">YOUR SLATE, SYNTHESIZED</div>
           <h2>
-            The desk read<span className="green">.</span>
+            The desk read<span className="accent-text">.</span>
           </h2>
           <p>
             {date} · {visible.length} matchups ·{" "}
@@ -1572,7 +1572,7 @@ function Featured({
         </div>
         <div>
           <span className="eyebrow">WIN PROBABILITY</span>
-          <strong className="green">
+          <strong className="accent-text">
             {pct(f.home !== null ? Math.max(f.home, f.away!) : null, 1)}
           </strong>
         </div>
@@ -1583,7 +1583,7 @@ function Featured({
       </div>
       <div className="featured-footer">
         <span>
-          <span className="green">✳</span>
+          <span className="accent-text">✳</span>
           {f.quality} sample coverage
         </span>
         <button onClick={onOpen}>
@@ -1679,7 +1679,7 @@ function Methodology() {
         <h2>
           Understand the game.
           <br />
-          <span className="green">Then question the price.</span>
+          <span className="accent-text">Then question the price.</span>
         </h2>
         <p>
           Sportsdesk turns sports data into an inspectable research packet. A

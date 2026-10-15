@@ -92,7 +92,7 @@ export function Markets({
                         prediction.home !== null &&
                         fair &&
                         prediction.home > fair.home
-                          ? "green"
+                          ? "accent-text"
                           : ""
                       }
                     >
@@ -182,7 +182,7 @@ function PriceLab({ probability }: { probability: number | null }) {
         <strong
           className={
             valid && probability !== null && probability * decimal > 1
-              ? "green"
+              ? "accent-text"
               : ""
           }
         >
@@ -315,7 +315,7 @@ export function ResearchPanel({
               {game.state === "in" && (
                 <p className="section-note">
                   {game.demo ? "Sample" : "ESPN"} in-game home probability:{" "}
-                  <b className="green">
+                  <b className="accent-text">
                     {pct(research?.liveHomeProbability ?? null, 1)}
                   </b>
                   . Separate from the Sportsdesk pregame model.
@@ -351,7 +351,7 @@ export function ResearchPanel({
                   <h4>{f.name}</h4>
                   <p>{f.detail}</p>
                 </div>
-                <span className={f.value >= 0 ? "green" : "pink"}>
+                <span className={f.value >= 0 ? "accent-text" : "pink"}>
                   {f.value >= 0 ? "+" : ""}
                   {f.value.toFixed(2)}
                   <small>log-odds</small>
