@@ -2,7 +2,7 @@
 
 A standalone sports research workspace for betting and prediction markets. evidence-first workflow: **ingest → normalize → calculate → explain → compare prices → preserve the thesis**.
 
-Sportsdesk owns its source code, fonts, sample dataset, configuration, tests and production runtime. 
+Sportsdesk owns its source code, fonts, sample dataset, configuration, tests and production runtime.
 
 ## Run locally
 
@@ -27,9 +27,13 @@ npm start
 - **Research packets:** inspect model factors, season records, recent results, comparison statistics, player leaders, current-game box scores, injuries, headlines, source links and retrieval timestamps. Export a JSON evidence packet.
 - **GPT analysis:** open a matchup's **GPT analysis** tab, inspect the input packet, then run on-demand GPT research. It assembles player, matchup, news, coaching, schedule, statistics and market evidence; enriches current context through cited web search; and generates a separate judgment with supporting evidence, counter-case, uncertainty and report exports. Sample mode demonstrates the workflow without an OpenAI call. See [the packet design deep dive](docs/gpt-analysis.md).
 - **Players / Teams:** research matchup leaders and availability; inspect current-season standings and scoring profiles.
-- **Tournaments:** competition slate, provider tournament/postseason labels, venue and neutral-site context. This is a competition research view, not a simulated bracket or championship forecasting model.
+- **Tournaments:** official competition slate, provider tournament/postseason labels, venue and neutral-site context. The separate **Decision lab → Tournament lab** provides a clearly labeled hypothetical bracket sandbox.
 - **Markets:** compare independent model probabilities with moneyline prices from ESPN reference lines, The Odds API and exact-match Polymarket contracts. Includes no-vig probability, probability gap, freshness and a hypothetical decimal-odds EV calculator.
 - **Watchlist:** save a frozen matchup snapshot and editable thesis. Versioned browser-local storage persists across reloads; export a backup as JSON. These are personal device records, not a shared account database.
+- **Decision lab:** a counterfactual scenario studio with lineup-margin sliders, neutral-venue toggle, user-defined uncertainty range, interactive sensitivity heatmap and hypothetical price break-even comparison. Share the exact assumptions by URL or export a navy/aqua SVG thesis card.
+- **Tournament lab:** build a 2-, 4- or 8-team field within one sport; swap bracket slots, compute exact advancement/title probabilities over every possible path, and play reproducible alternate universes. Export the complete bracket and assumptions as JSON.
+- **Prediction journal:** lock a written pregame thesis, probability and source snapshot; sync matching final scores, compare Brier scores against the original baseline, and inspect a calibration plot. Sample outcomes have separate manual controls and never mix with real-game results. Device-local storage, JSON exports and explicit deletion; no account required.
+- **Demo walkthrough:** a four-step guided presentation inside Decision lab. Start with the sample workspace for a reliable, API-free hackathon demo. See [the demo script and feature math](docs/decision-lab.md).
 - **Daily brief:** generate a deterministic evidence-based slate summary and download it as text.
 - **Methodology:** inspect all baseline parameters and limitations.
 
@@ -37,12 +41,12 @@ Keyboard: **Cmd/Ctrl+K** focuses search. Research dialogs trap focus through nat
 
 ## Data providers
 
-| Provider | Data | Configuration / behavior |
-| --- | --- | --- |
-| ESPN public feeds | NBA, NFL, MLB, NHL, NCAA men's basketball; scores, schedules, records, standings, matchup research | No API key. Public, undocumented feed contracts can change; upstream availability is not guaranteed. |
-| ESPN reference odds | Moneyline prices when included in the scoreboard | No reliable quote timestamp; never treated as fresh signals. |
-| [The Odds API](https://the-odds-api.com/liveapi/guides/v4/) | Two-outcome bookmaker moneylines | Optional `ODDS_API_KEY` in `.env.local`. Server-side only; US region. Responses cached for five minutes to limit quota consumption. |
-| [Polymarket Gamma](https://docs.polymarket.com/market-data/discover-markets) | Public sports moneyline markets | No key. Searches the latest 100 active sports events; coverage is partial. Requires exact full team outcomes, game start within four hours, and moneyline contract type. Props, spreads, futures and generic yes/no contracts are excluded. The public endpoint may be blocked in some regions. |
+| Provider                                                                     | Data                                                                                               | Configuration / behavior                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ESPN public feeds                                                            | NBA, NFL, MLB, NHL, NCAA men's basketball; scores, schedules, records, standings, matchup research | No API key. Public, undocumented feed contracts can change; upstream availability is not guaranteed.                                                                                                                                                                                            |
+| ESPN reference odds                                                          | Moneyline prices when included in the scoreboard                                                   | No reliable quote timestamp; never treated as fresh signals.                                                                                                                                                                                                                                    |
+| [The Odds API](https://the-odds-api.com/liveapi/guides/v4/)                  | Two-outcome bookmaker moneylines                                                                   | Optional `ODDS_API_KEY` in `.env.local`. Server-side only; US region. Responses cached for five minutes to limit quota consumption.                                                                                                                                                             |
+| [Polymarket Gamma](https://docs.polymarket.com/market-data/discover-markets) | Public sports moneyline markets                                                                    | No key. Searches the latest 100 active sports events; coverage is partial. Requires exact full team outcomes, game start within four hours, and moneyline contract type. Props, spreads, futures and generic yes/no contracts are excluded. The public endpoint may be blocked in some regions. |
 
 Copy `.env.example` to `.env.local` when configuring a provider. Basic research and the daily brief work without an AI API. Live GPT analysis uses `OPENAI_API_KEY`; `OPENAI_MODEL` optionally overrides the default `gpt-6.1-sol`. Keys stay on the server. Web enrichment uses OpenAI's hosted search, so no additional search-service key is required.
 
@@ -88,7 +92,7 @@ GET /api/analysis?league=NBA&id=<ESPN-event-id>&date=2026-10-15
 POST /api/analysis  # JSON { league, id, date }; streamed progress and report
 ```
 
-Dates must be valid `YYYY-MM-DD` values; leagues and event identifiers are validated. Sample event IDs such as `demo-1` return sample packets. API keys are read on the server and never returned. The platform and its research APIs are accessible without sign-in or authorization, as requested. Each visitor's watchlist stays in their own browser.
+Dates must be valid `YYYY-MM-DD` values; leagues and event identifiers are validated. Sample event IDs such as `demo-1` return sample packets. API keys are read on the server and never returned. The platform and its research APIs are accessible without sign-in or authorization, as requested. Each visitor's watchlist and prediction journal stay in their own browser. Decision lab needs no additional environment variables or AI calls.
 
 ## Verification
 
@@ -101,7 +105,7 @@ npx playwright install chromium  # once, if no Playwright browser is installed
 npm run test:browser
 ```
 
-The standalone check copies the production runtime and static assets into a temporary directory, starts it there, and verifies the workspace and research APIs. No inspiration folder is present. Browser tests cover research tabs, market price calculations, watchlist notes across reloads, exports, competition context, filters, mobile navigation and unavailable live feeds.
+The standalone check copies the production runtime and static assets into a temporary directory, starts it there, and verifies the workspace and research APIs. No inspiration folder is present. Browser tests cover research and GPT workflows, scenario/share-link round trips, SVG exports, journal persistence and final-score settlement, exact bracket exports and field swaps, the guided demo, mobile layouts, and unavailable live feeds.
 
 ## Deployment
 
@@ -111,11 +115,11 @@ Import this repository with the **Next.js** framework preset, repository root as
 
 **Required for basic sports research: none. Required for live GPT analysis: `OPENAI_API_KEY`.**
 
-| Variable | Purpose | Environments |
-| --- | --- | --- |
+| Variable         | Purpose                                                    | Environments                                   |
+| ---------------- | ---------------------------------------------------------- | ---------------------------------------------- |
 | `OPENAI_API_KEY` | GPT matchup judgments and cited news/coaching web research | Production, and Preview/Development if desired |
-| `OPENAI_MODEL` | Optional model override; defaults to `gpt-6.1-sol` | Same environments as the key |
-| `ODDS_API_KEY` | Timestamped bookmaker moneylines from The Odds API | Production, and Preview/Development if desired |
+| `OPENAI_MODEL`   | Optional model override; defaults to `gpt-6.1-sol`         | Same environments as the key                   |
+| `ODDS_API_KEY`   | Timestamped bookmaker moneylines from The Odds API         | Production, and Preview/Development if desired |
 
 Set these in Vercel's project **Settings → Environment Variables**, keep secrets server-only (no `NEXT_PUBLIC_` prefix), then redeploy for changes to apply. No `AUTH_*`, database, ESPN or Polymarket credentials are required. No sign-in is required to run GPT analysis. Sports-data and recent analysis caches reduce repeat requests; GPT/web-search usage is billed to the configured OpenAI API project.
 

@@ -1,5 +1,10 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+const DecisionLab = dynamic(
+  () => import("./decision-lab").then((m) => m.DecisionLab),
+  { loading: () => <p className="notice">Opening the decision lab…</p> },
+);
 import {
   Activity,
   ArrowDown,
@@ -66,6 +71,7 @@ const sections = [
   "Tournaments",
   "Markets",
   "Watchlist",
+  "Decision lab",
   "Methodology",
 ] as const;
 const icons = {
@@ -77,6 +83,7 @@ const icons = {
   Tournaments: Trophy,
   Markets: Globe2,
   Watchlist: Bookmark,
+  "Decision lab": FlaskConical,
   Methodology: FlaskConical,
 };
 const leagueIcons: Record<string, string> = {
@@ -118,6 +125,10 @@ const titles: Record<string, [string, string]> = {
   Watchlist: [
     "Keep your thesis in play.",
     "Your saved matchup snapshots and research notes, stored on this device.",
+  ],
+  "Decision lab": [
+    "Turn a hunch into a hypothesis.",
+    "A playground for alternate outcomes, tournament paths and predictions you can measure.",
   ],
   Methodology: [
     "Evidence before conviction.",
@@ -266,7 +277,7 @@ export function Sportsdesk({
     if (league !== "All sports") params.set("league", league);
     if (view !== "Overview") params.set("view", view);
     if (search) params.set("q", search);
-    history.replaceState(null, "", `?${params}`);
+    history.replaceState(null, "", `?${params}${location.hash}`);
   }, [board.mode, date, league, view, search]);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -575,7 +586,9 @@ export function Sportsdesk({
           <div className="page-heading">
             <div>
               <div className="eyebrow">
-                <span className="accent-text">THE SPORTS INTELLIGENCE WORKSPACE</span>
+                <span className="accent-text">
+                  THE SPORTS INTELLIGENCE WORKSPACE
+                </span>
                 <span className="heading-slash">/</span>
                 {when(`${date}T12:00:00-04:00`, {
                   weekday: "long",
@@ -701,6 +714,23 @@ export function Sportsdesk({
                   note="Saved research, ready when you are"
                 />
               </div>
+              <button
+                className="lab-launch"
+                onClick={() => navigate("Decision lab")}
+              >
+                <span className="lab-launch-icon">
+                  <FlaskConical size={24} />
+                </span>
+                <span>
+                  <small>NEW / DECISION LAB</small>
+                  <strong>Don’t just read the odds. Test the story.</strong>
+                  <span>
+                    Explore what-if scenarios, simulate a tournament and keep
+                    score of your predictions.
+                  </span>
+                </span>
+                <ArrowRight size={20} />
+              </button>
               <PanelTitle
                 title="On the radar"
                 subtitle="A closer look at the upcoming slate"
@@ -973,7 +1003,8 @@ export function Sportsdesk({
                       )}
                       <div className="intelligence-read">
                         <span className="eyebrow">
-                          <span className="accent-text">✳</span> THE RESEARCH READ
+                          <span className="accent-text">✳</span> THE RESEARCH
+                          READ
                         </span>
                         <p>{pick.reasons[0]}</p>
                         <div>
@@ -1049,6 +1080,10 @@ export function Sportsdesk({
                 </div>
               </aside>
             </div>
+          )}
+
+          {view === "Decision lab" && (
+            <DecisionLab board={board} games={visible} onOpen={openGame} />
           )}
 
           {view === "Teams" && (
