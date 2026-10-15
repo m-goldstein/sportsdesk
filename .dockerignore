@@ -1,0 +1,7 @@
+signalbot
+node_modules
+.next
+.git
+.env*
+test-results
+playwright-report
