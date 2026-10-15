@@ -12,6 +12,455 @@
   --amber: #d8b87a;
   --radius: 12px;
 }
+.gpt-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  border: 1px solid #2c5270;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #152c40, #111e30);
+}
+.gpt-entry > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--accent);
+}
+.gpt-entry strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #d4e7f5;
+}
+.gpt-entry small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.gpt-analysis {
+  padding: 3px 0 12px;
+}
+.gpt-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid #2c5270;
+  background:
+    radial-gradient(ellipse at 0 0, #16405655, transparent 80%), #121e31;
+  border-radius: 10px;
+}
+.gpt-symbol {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #16374a;
+  border: 1px solid #306476;
+  border-radius: 12px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.gpt-hero h2 {
+  font-size: 20px;
+  margin-top: 9px;
+  letter-spacing: -0.5px;
+  line-height: 1.5;
+}
+.gpt-hero p {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.gpt-hero > .primary {
+  margin-left: auto;
+  font-size: 10px;
+}
+.gpt-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.gpt-progress > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+  font-size: 10px;
+  color: var(--muted);
+  background: #142338;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.gpt-progress > span.current {
+  border-color: #41869a;
+  color: var(--accent);
+  background: #163043;
+}
+.gpt-progress .spinner {
+  margin-left: auto;
+  width: 11px;
+  height: 11px;
+}
+.gpt-coverage {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.gpt-coverage .pill {
+  display: flex;
+  gap: 5px;
+  font-size: 9px;
+  padding: 5px 7px;
+}
+.gpt-coverage b {
+  font-size: 8px;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-left: 3px;
+}
+.gpt-verdict {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border-color: #367184;
+  background:
+    radial-gradient(ellipse at 100% 0, #1e60742b, transparent 85%), #12273a;
+}
+.gpt-verdict h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.gpt-verdict p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b5ccdf;
+  margin-top: 12px;
+}
+.gpt-probability {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  flex-shrink: 0;
+  text-align: center;
+  padding-left: 20px;
+  border-left: 1px solid #2e5065;
+}
+.gpt-probability > strong {
+  font-size: 38px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: var(--accent);
+}
+.gpt-probability > span:not(.pill) {
+  font-size: 9px;
+  color: var(--muted);
+}
+.gpt-comparison {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  margin-bottom: 20px;
+  background: #101b2c;
+}
+.gpt-comparison > span {
+  padding: 15px;
+  font-size: 10px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.gpt-comparison b {
+  color: var(--accent);
+  font-weight: 500;
+}
+.gpt-comparison > span + span {
+  border-left: 1px solid var(--line);
+}
+.gpt-read-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.gpt-read-grid > .research-block {
+  margin-bottom: 0;
+}
+.gpt-read-grid {
+  margin-bottom: 18px;
+}
+.gpt-prose {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #b5ccdf;
+  margin-top: 12px;
+}
+.gpt-citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.gpt-citations > span {
+  font-size: 9px;
+  max-width: 100%;
+  border: 1px solid #2a4963;
+  border-radius: 4px;
+  padding: 4px 6px;
+  color: #9ddce9;
+  background: #132c3c;
+  line-height: 1.6;
+}
+.gpt-citations a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  overflow-wrap: anywhere;
+}
+.gpt-citations a:hover {
+  color: var(--accent);
+}
+.gpt-list {
+  padding-left: 18px;
+  margin: 14px 0 0;
+  font-size: 11px;
+  color: #a6bdd2;
+  line-height: 1.9;
+}
+.gpt-list > li + li {
+  margin-top: 7px;
+}
+.gpt-factor {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.gpt-factor h4 {
+  font-size: 12px;
+  color: #d3e7f7;
+}
+.gpt-factor p {
+  font-size: 11px;
+  color: #a9c0d4;
+  line-height: 1.9;
+  margin-top: 8px;
+}
+.gpt-factor > .pill {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.gpt-subheading {
+  font-size: 12px;
+  margin-top: 23px;
+  color: #d3e7f7;
+}
+.gpt-report-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 10px;
+  color: #a6bdd2;
+  padding: 4px 0 22px;
+  line-height: 1.8;
+}
+.gpt-report-meta small {
+  display: block;
+  font-size: 9px;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+.gpt-evidence {
+  margin: 0 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #111f31;
+  padding: 15px 18px;
+  min-width: 0;
+}
+.gpt-evidence > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #c4d7e8;
+  font-size: 11px;
+  line-height: 1.7;
+  list-style-position: inside;
+}
+.gpt-evidence > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+.gpt-evidence > summary > span {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 9px;
+}
+.gpt-packet-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+.gpt-packet-actions > .section-note {
+  margin: 0;
+  font-size: 10px;
+}
+.gpt-packet-actions > .secondary {
+  margin-left: auto;
+  font-size: 9px;
+}
+.gpt-evidence-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.gpt-evidence-item h4 {
+  font-size: 12px;
+  margin: 10px 0 7px;
+}
+.gpt-evidence-item small {
+  font-size: 9px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.gpt-evidence-item pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 340px;
+  overflow: auto;
+  font-size: 10px;
+  line-height: 1.8;
+  background: #0b1524;
+  border: 1px solid #22374e;
+  border-radius: 6px;
+  padding: 13px;
+  color: #abc4d9;
+  margin-top: 15px;
+}
+@media (max-width: 800px) {
+  .gpt-hero {
+    flex-wrap: wrap;
+  }
+  .gpt-hero > .primary {
+    margin-left: 64px;
+  }
+  .gpt-comparison > span {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .gpt-progress {
+    grid-template-columns: 1fr;
+  }
+  .gpt-progress > span {
+    padding: 11px 13px;
+  }
+}
+@media (max-width: 600px) {
+  .gpt-entry {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .gpt-entry strong {
+    font-size: 10px;
+  }
+  .gpt-hero {
+    padding: 17px;
+    gap: 12px;
+  }
+  .gpt-symbol {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+  .gpt-hero > div {
+    flex: 1;
+    min-width: 180px;
+  }
+  .gpt-hero .eyebrow {
+    font-size: 7px;
+  }
+  .gpt-hero h2 {
+    font-size: 17px;
+  }
+  .gpt-hero > .primary {
+    margin-left: 0;
+    width: 100%;
+    font-size: 10px;
+  }
+  .gpt-verdict {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+  .gpt-verdict h2 {
+    font-size: 21px;
+  }
+  .gpt-verdict p,
+  .gpt-prose {
+    font-size: 11px;
+  }
+  .gpt-probability {
+    border-left: 0;
+    border-top: 1px solid #2e5065;
+    padding: 15px 0 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .gpt-probability > strong {
+    font-size: 32px;
+  }
+  .gpt-read-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+  .gpt-comparison > span {
+    font-size: 9px;
+    padding: 11px;
+  }
+  .gpt-report-meta {
+    flex-wrap: wrap;
+  }
+  .gpt-evidence {
+    padding: 13px;
+  }
+  .gpt-evidence > summary {
+    flex-wrap: wrap;
+    font-size: 10px;
+  }
+  .gpt-evidence > summary > span {
+    margin-left: 23px;
+  }
+  .gpt-packet-actions {
+    flex-wrap: wrap;
+  }
+  .gpt-packet-actions > .secondary {
+    margin-left: 0;
+  }
+  .gpt-coverage .pill {
+    font-size: 8px;
+    padding: 4px 5px;
+  }
+  .gpt-list {
+    font-size: 10px;
+  }
+}
 * {
   box-sizing: border-box;
 }

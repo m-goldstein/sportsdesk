@@ -25,6 +25,7 @@ npm start
 - **Overview / Matchups:** searchable slate, league/status filters, probability sorting, matchup cards and evidence summaries. Filters are bookmarkable. Times use America/New_York; scores refresh every 60 seconds while the tab is visible.
 - **Live games:** scoreboard and game research, including provider live win probability when available. Live and completed games never receive a retrospective pregame forecast.
 - **Research packets:** inspect model factors, season records, recent results, comparison statistics, player leaders, current-game box scores, injuries, headlines, source links and retrieval timestamps. Export a JSON evidence packet.
+- **GPT analysis:** open a matchup's **GPT analysis** tab, inspect the input packet, then run on-demand GPT research. It assembles player, matchup, news, coaching, schedule, statistics and market evidence; enriches current context through cited web search; and generates a separate judgment with supporting evidence, counter-case, uncertainty and report exports. Sample mode demonstrates the workflow without an OpenAI call. See [the packet design deep dive](docs/gpt-analysis.md).
 - **Players / Teams:** research matchup leaders and availability; inspect current-season standings and scoring profiles.
 - **Tournaments:** competition slate, provider tournament/postseason labels, venue and neutral-site context. This is a competition research view, not a simulated bracket or championship forecasting model.
 - **Markets:** compare independent model probabilities with moneyline prices from ESPN reference lines, The Odds API and exact-match Polymarket contracts. Includes no-vig probability, probability gap, freshness and a hypothetical decimal-odds EV calculator.
@@ -43,7 +44,7 @@ Keyboard: **Cmd/Ctrl+K** focuses search. Research dialogs trap focus through nat
 | [The Odds API](https://the-odds-api.com/liveapi/guides/v4/) | Two-outcome bookmaker moneylines | Optional `ODDS_API_KEY` in `.env.local`. Server-side only; US region. Responses cached for five minutes to limit quota consumption. |
 | [Polymarket Gamma](https://docs.polymarket.com/market-data/discover-markets) | Public sports moneyline markets | No key. Searches the latest 100 active sports events; coverage is partial. Requires exact full team outcomes, game start within four hours, and moneyline contract type. Props, spreads, futures and generic yes/no contracts are excluded. The public endpoint may be blocked in some regions. |
 
-Copy `.env.example` to `.env.local` only if configuring the optional odds provider. No external AI API is required: narrative synthesis is deterministic and derives from the packet.
+Copy `.env.example` to `.env.local` when configuring a provider. Basic research and the daily brief work without an AI API. Live GPT analysis uses `OPENAI_API_KEY`; `OPENAI_MODEL` optionally overrides the default `gpt-6.1-sol`. Keys stay on the server. Web enrichment uses OpenAI's hosted search, so no additional search-service key is required.
 
 Feeds may be delayed. Sportsdesk distinguishes retrieval time from provider quote update time. Missing or failed live data remains missing; it never silently falls back to sample data. ESPN calls cache for 60 seconds, standings for five minutes, and Polymarket for two minutes. Standings enrich only compatible current/future dates and matching season/type; historical dates use the scoreboard's records to avoid current-season leakage.
 
@@ -72,16 +73,19 @@ src/lib/types.ts          Normalized sports/research/market contracts
 src/lib/providers.ts      ESPN, The Odds API and Polymarket adapters
 src/lib/model.ts          Pure probability, no-vig, freshness and EV calculations
 src/lib/demo.ts           Independent, explicitly illustrative sample dataset
+src/lib/analysis-*.ts     Versioned GPT packet, extended context, validation and orchestration
 tests/                    Model/provider regression tests and browser workflows
 scripts/check-standalone.mjs  Isolated production-runtime verification
 ```
 
-Read-only APIs:
+Research APIs:
 
 ```text
 GET /api/board?date=2026-10-15&league=NBA&mode=live
 GET /api/research?league=NBA&id=<ESPN-event-id>
 GET /api/markets?league=NBA&id=<ESPN-event-id>&date=2026-10-15
+GET /api/analysis?league=NBA&id=<ESPN-event-id>&date=2026-10-15
+POST /api/analysis  # JSON { league, id, date }; streamed progress and report
 ```
 
 Dates must be valid `YYYY-MM-DD` values; leagues and event identifiers are validated. Sample event IDs such as `demo-1` return sample packets. API keys are read on the server and never returned. The platform and its research APIs are accessible without sign-in or authorization, as requested. Each visitor's watchlist stays in their own browser.
@@ -105,13 +109,15 @@ The standalone check copies the production runtime and static assets into a temp
 
 Import this repository with the **Next.js** framework preset, repository root as the root directory, Node.js **22.x**, install command `npm ci`, and build command `npm run build`. Leave the output directory at the framework default.
 
-**Required environment variables: none.** The only optional application variable is:
+**Required for basic sports research: none. Required for live GPT analysis: `OPENAI_API_KEY`.**
 
 | Variable | Purpose | Environments |
 | --- | --- | --- |
+| `OPENAI_API_KEY` | GPT matchup judgments and cited news/coaching web research | Production, and Preview/Development if desired |
+| `OPENAI_MODEL` | Optional model override; defaults to `gpt-6.1-sol` | Same environments as the key |
 | `ODDS_API_KEY` | Timestamped bookmaker moneylines from The Odds API | Production, and Preview/Development if desired |
 
-Add it in Vercel's project **Settings → Environment Variables**, keep it server-only (no `NEXT_PUBLIC_` prefix), then redeploy for the change to apply. No `AUTH_*`, database, OpenAI, ESPN or Polymarket credentials are required.
+Set these in Vercel's project **Settings → Environment Variables**, keep secrets server-only (no `NEXT_PUBLIC_` prefix), then redeploy for changes to apply. No `AUTH_*`, database, ESPN or Polymarket credentials are required. No sign-in is required to run GPT analysis. Sports-data and recent analysis caches reduce repeat requests; GPT/web-search usage is billed to the configured OpenAI API project.
 
 The application has no authentication gate. To make a deployment itself accessible without a Vercel login, also disable Vercel Authentication / Password Protection for the intended public deployment under **Deployment Protection**. This hosting setting is separate from application code and environment variables. References: [environment variables](https://vercel.com/docs/environment-variables), [deployment protection](https://vercel.com/docs/deployment-protection).
 

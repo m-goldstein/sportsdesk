@@ -5,10 +5,14 @@ import {
   ArrowDownToLine,
   Check,
   FileText,
+  Sparkles,
   ShieldCheck,
 } from "lucide-react";
 import { forecast, noVig, decimalToAmerican, quoteFresh } from "@/lib/model";
 import { Game, Quote, Research } from "@/lib/types";
+import { GptAnalysis } from "./gpt-analysis";
+import { download } from "@/lib/download";
+export { download } from "@/lib/download";
 import {
   Empty,
   ExternalLink,
@@ -19,18 +23,6 @@ import {
   TeamMark,
   when,
 } from "./ui";
-export function download(
-  name: string,
-  text: string,
-  type = "application/json",
-) {
-  const url = URL.createObjectURL(new Blob([text], { type }));
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = name;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 export function Markets({
   game,
   quotes,
@@ -242,18 +234,23 @@ export function ResearchPanel({
         role="tablist"
         aria-label="Research sections"
       >
-        {["Overview", "Players", "Availability", "Markets", "Sources"].map(
-          (t) => (
-            <button
-              key={t}
-              role="tab"
-              aria-selected={tab === t}
-              onClick={() => setTab(t)}
-            >
-              {t}
-            </button>
-          ),
-        )}
+        {[
+          "Overview",
+          "GPT analysis",
+          "Players",
+          "Availability",
+          "Markets",
+          "Sources",
+        ].map((t) => (
+          <button
+            key={t}
+            role="tab"
+            aria-selected={tab === t}
+            onClick={() => setTab(t)}
+          >
+            {t}
+          </button>
+        ))}
         <button
           className="export-button"
           onClick={() =>
@@ -277,6 +274,29 @@ export function ResearchPanel({
           Export packet
         </button>
       </div>
+      <div hidden={tab !== "GPT analysis"}>
+        <GptAnalysis
+          key={`${game.id}:${game.start}`}
+          game={game}
+          enabled={tab === "GPT analysis"}
+        />
+      </div>
+      {tab === "Overview" && game.state !== "post" && (
+        <div className="gpt-entry">
+          <div>
+            <Sparkles size={17} />
+            <span>
+              <strong>Take the matchup through GPT research.</strong>
+              <small>
+                Player context, news and coach background, with cited evidence.
+              </small>
+            </span>
+          </div>
+          <button className="secondary" onClick={() => setTab("GPT analysis")}>
+            Open GPT analysis <Sparkles size={13} />
+          </button>
+        </div>
+      )}
       {loading && (
         <div className="notice">
           <span className="spinner" /> Gathering matchup evidence…
