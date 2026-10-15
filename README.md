@@ -1,8 +1,8 @@
 # Sportsdesk
 
-A standalone sports research workspace for betting and prediction markets. Inspired by Wolfdesk's evidence-first workflow: **ingest → normalize → calculate → explain → compare prices → preserve the thesis**.
+A standalone sports research workspace for betting and prediction markets. evidence-first workflow: **ingest → normalize → calculate → explain → compare prices → preserve the thesis**.
 
-Sportsdesk owns its source code, fonts, sample dataset, configuration, tests and production runtime. The reference `signalbot/` directory is ignored, excluded from TypeScript and production tracing, and can be removed without affecting this application. No credentials, database, images or modules are inherited from it.
+Sportsdesk owns its source code, fonts, sample dataset, configuration, tests and production runtime. 
 
 ## Run locally
 
