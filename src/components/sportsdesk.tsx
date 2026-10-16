@@ -77,21 +77,28 @@ const OutcomeRankings = dynamic(
   { loading: () => <p className="notice">Opening outcome rankings…</p> },
 );
 type Saved = { game: Game; savedAt: string; note: string };
-const sections = [
-  "Overview",
-  "Matchups",
-  "Live games",
-  "Players",
-  "Teams",
-  "Tournaments",
-  "Markets",
-  "Weather markets",
-  "Election desk",
-  "Top outcomes",
-  "Watchlist",
-  "Decision lab",
-  "Methodology",
+const navigationGroups = [
+  {
+    label: "Sports",
+    items: [
+      "Overview",
+      "Matchups",
+      "Live games",
+      "Players",
+      "Teams",
+      "Tournaments",
+      "Markets",
+      "Decision lab",
+    ],
+  },
+  { label: "Weather", items: ["Weather markets"] },
+  { label: "Elections", items: ["Election desk"] },
+  { label: "Top Outcomes", items: ["Top outcomes"] },
+  { label: "Your desk", items: ["Watchlist", "Methodology"] },
 ] as const;
+type Section = (typeof navigationGroups)[number]["items"][number];
+const sections = navigationGroups.flatMap<Section>((group) => group.items);
+
 const icons = {
   Overview: LayoutDashboard,
   Matchups: BarChart3,
@@ -504,56 +511,39 @@ export function Oracular({
           </div>
           <span className="pill">v1</span>
         </div>
-        <span className="nav-label">WORKSPACE</span>
         <nav aria-label="Workspace navigation">
-          {sections.slice(0, 3).map((name) => {
-            const Icon = icons[name];
-            return (
-              <button
-                key={name}
-                className={view === name ? "active" : ""}
-                onClick={() => navigate(name)}
-              >
-                <Icon size={17} />
-                {name}
-                {name === "Live games" && (
-                  <span className="nav-count">{liveCount}</span>
-                )}
-              </button>
-            );
-          })}
-          <span className="nav-label">RESEARCH & INTELLIGENCE</span>
-          {sections.slice(3, 10).map((name) => {
-            const Icon = icons[name];
-            return (
-              <button
-                key={name}
-                className={view === name ? "active" : ""}
-                onClick={() => navigate(name)}
-              >
-                <Icon size={17} />
-                {name}
-                {name === "Markets" && <span className="tiny-pill">BETA</span>}
-              </button>
-            );
-          })}
-          <span className="nav-label">YOUR DESK</span>
-          {sections.slice(10).map((name) => {
-            const Icon = icons[name];
-            return (
-              <button
-                key={name}
-                className={view === name ? "active" : ""}
-                onClick={() => navigate(name)}
-              >
-                <Icon size={17} />
-                {name}
-                {name === "Watchlist" && (
-                  <span className="nav-count">{saved.length}</span>
-                )}
-              </button>
-            );
-          })}
+          {navigationGroups.map((group) => (
+            <section
+              className="nav-group"
+              key={group.label}
+              aria-label={group.label}
+            >
+              <h2 className="nav-label">{group.label}</h2>
+              {group.items.map((name) => {
+                const Icon = icons[name];
+                return (
+                  <button
+                    key={name}
+                    className={view === name ? "active" : ""}
+                    aria-current={view === name ? "page" : undefined}
+                    onClick={() => navigate(name)}
+                  >
+                    <Icon size={17} />
+                    {name}
+                    {name === "Live games" && (
+                      <span className="nav-count">{liveCount}</span>
+                    )}
+                    {name === "Watchlist" && (
+                      <span className="nav-count">{saved.length}</span>
+                    )}
+                    {name === "Markets" && (
+                      <span className="tiny-pill">BETA</span>
+                    )}
+                  </button>
+                );
+              })}
+            </section>
+          ))}
         </nav>
         <div className="sidebar-bottom">
           <div className="desk-note">

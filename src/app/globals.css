@@ -694,6 +694,22 @@ svg {
   flex-direction: column;
   gap: 4px;
 }
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-group + .nav-group {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #21344d;
+}
+.nav-group .nav-label {
+  margin-top: 13px;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  font-family: var(--font-sans), Arial, sans-serif;
+}
 .sidebar nav button {
   display: flex;
   align-items: center;
