@@ -1,4 +1,4 @@
-import { Sportsdesk } from "@/components/sportsdesk";
+import { Oracular } from "@/components/sportsdesk";
 import { getBoard, today, validDate } from "@/lib/providers";
 import { demoBoard } from "@/lib/demo";
 export default async function Page({
@@ -13,7 +13,7 @@ export default async function Page({
       : today();
   const board = query.mode === "demo" ? demoBoard(date) : await getBoard(date);
   return (
-    <Sportsdesk
+    <Oracular
       initialBoard={board}
       initialDate={date}
       initialLeague={

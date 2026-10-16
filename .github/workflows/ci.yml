@@ -1,4 +1,4 @@
-name: Verify Sportsdesk
+name: Verify Oracular
 on:
   push:
     branches: [main]

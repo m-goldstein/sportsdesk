@@ -194,7 +194,7 @@ export function basePacket(
         title: "Provider in-game probability",
         data: {
           homeWinProbability: research.liveHomeProbability,
-          origin: "ESPN; independent of Sportsdesk baseline and GPT",
+          origin: "ESPN; independent of Oracular baseline and GPT",
         },
       });
   }

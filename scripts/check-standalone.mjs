@@ -4,7 +4,7 @@ import { join, resolve } from "node:path";
 import { spawn } from "node:child_process";
 const root = process.cwd();
 await access(join(root, ".next/standalone/server.js"));
-const directory = await mkdtemp(join(tmpdir(), "sportsdesk-isolated-"));
+const directory = await mkdtemp(join(tmpdir(), "oracular-isolated-"));
 let child;
 try {
   await cp(join(root, ".next/standalone"), directory, { recursive: true });
@@ -47,8 +47,32 @@ try {
   ).json();
   if (board.games.length !== 8 || !research.players.length)
     throw new Error("Standalone research flow failed.");
+  const [weather, elections, rankings] = await Promise.all([
+    fetch(`${origin}/api/weather?mode=demo&date=2026-10-16`).then((r) =>
+      r.json(),
+    ),
+    fetch(`${origin}/api/elections?mode=demo`).then((r) => r.json()),
+    fetch(`${origin}/api/rankings?mode=demo&date=2026-10-15`).then((r) =>
+      r.json(),
+    ),
+  ]);
+  if (
+    weather.rows?.length !== 9 ||
+    elections.rows?.length !== 10 ||
+    rankings.sports?.length !== 14
+  )
+    throw new Error("Standalone multi-market routes failed.");
+  const electionResearch = await (
+    await fetch(`${origin}/api/elections/analysis`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ raceId: "michigan-governor", mode: "demo" }),
+    })
+  ).json();
+  if (electionResearch.mode !== "demo" || electionResearch.polls?.length !== 3)
+    throw new Error("Standalone election research failed.");
   console.log(
-    "PASS: copied production runtime starts in an isolated temporary directory without signalbot; workspace, board API and research API verified.",
+    "PASS: copied production runtime starts in an isolated temporary directory without signalbot; workspace, sports research, weather, elections, rankings and sample election analysis verified.",
   );
 } finally {
   if (child) {

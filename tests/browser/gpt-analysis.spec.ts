@@ -41,7 +41,7 @@ test("GPT packet preview, streamed sample report, citations and export work with
   const exported = page.waitForEvent("download");
   await dialog.getByRole("button", { name: "Export GPT analysis" }).click();
   expect((await exported).suggestedFilename()).toBe(
-    "sportsdesk-gpt-demo-1.json",
+    "oracular-gpt-demo-1.json",
   );
   await dialog.getByRole("tab", { name: "Players", exact: true }).click();
   await dialog.getByRole("tab", { name: "GPT analysis", exact: true }).click();

@@ -6,6 +6,9 @@ const DecisionLab = dynamic(
   { loading: () => <p className="notice">Opening the decision lab…</p> },
 );
 import {
+  CloudSun,
+  Landmark,
+  ListOrdered,
   Activity,
   ArrowDown,
   ArrowDownToLine,
@@ -61,6 +64,18 @@ import {
 } from "./ui";
 import { download, Markets, ResearchPanel } from "./research-panel";
 
+const WeatherDesk = dynamic(
+  () => import("./weather-desk").then((m) => m.WeatherDesk),
+  { loading: () => <p className="notice">Opening weather markets…</p> },
+);
+const ElectionDesk = dynamic(
+  () => import("./election-desk").then((m) => m.ElectionDesk),
+  { loading: () => <p className="notice">Opening election research…</p> },
+);
+const OutcomeRankings = dynamic(
+  () => import("./outcome-rankings").then((m) => m.OutcomeRankings),
+  { loading: () => <p className="notice">Opening outcome rankings…</p> },
+);
 type Saved = { game: Game; savedAt: string; note: string };
 const sections = [
   "Overview",
@@ -70,6 +85,9 @@ const sections = [
   "Teams",
   "Tournaments",
   "Markets",
+  "Weather markets",
+  "Election desk",
+  "Top outcomes",
   "Watchlist",
   "Decision lab",
   "Methodology",
@@ -82,6 +100,9 @@ const icons = {
   Teams: ShieldCheck,
   Tournaments: Trophy,
   Markets: Globe2,
+  "Weather markets": CloudSun,
+  "Election desk": Landmark,
+  "Top outcomes": ListOrdered,
   Watchlist: Bookmark,
   "Decision lab": FlaskConical,
   Methodology: FlaskConical,
@@ -122,6 +143,18 @@ const titles: Record<string, [string, string]> = {
     "A probability has a price.",
     "Compare your matchup thesis with sportsbooks and prediction markets.",
   ],
+  "Weather markets": [
+    "Read the sky. Price the outcome.",
+    "NOAA station forecasts meet live daily-high temperature contracts.",
+  ],
+  "Election desk": [
+    "Every race has a deeper story.",
+    "Governors, Senate races, original polling and the news behind the market.",
+  ],
+  "Top outcomes": [
+    "Find the clearest outcomes.",
+    "Rank sports, weather and election contracts across one research desk.",
+  ],
   Watchlist: [
     "Keep your thesis in play.",
     "Your saved matchup snapshots and research notes, stored on this device.",
@@ -132,10 +165,10 @@ const titles: Record<string, [string, string]> = {
   ],
   Methodology: [
     "Evidence before conviction.",
-    "Understand exactly what goes into a Sportsdesk forecast.",
+    "Understand exactly what goes into a Oracular forecast.",
   ],
 };
-export function Sportsdesk({
+export function Oracular({
   initialBoard,
   initialDate,
   initialLeague,
@@ -423,7 +456,7 @@ export function Sportsdesk({
     );
   };
   const briefText = [
-    `SPORTSDESK / DAILY RESEARCH BRIEF`,
+    `ORACULAR / DAILY RESEARCH BRIEF`,
     `${date} · ${board.mode === "demo" ? "ILLUSTRATIVE SAMPLE" : "Live feed"}`,
     "",
     ...visible.map((g) => {
@@ -446,12 +479,20 @@ export function Sportsdesk({
         />
       )}
       <aside className={`sidebar ${mobileMenu ? "open" : ""}`}>
-        <a className="brand" href="/" aria-label="Sportsdesk home">
+        <a className="brand" href="/" aria-label="Oracular home">
           <span className="brand-mark">
-            s<span />
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M3 16s5-8 13-8 13 8 13 8-5 8-13 8S3 16 3 16Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              />
+              <circle cx="16" cy="16" r="4" fill="currentColor" />
+            </svg>
           </span>
           <span>
-            sportsdesk<span className="accent-text">.</span>
+            Oracular<span className="accent-text">.</span>
           </span>
         </a>
         <div className="workspace-label">
@@ -482,7 +523,7 @@ export function Sportsdesk({
             );
           })}
           <span className="nav-label">RESEARCH & INTELLIGENCE</span>
-          {sections.slice(3, 7).map((name) => {
+          {sections.slice(3, 10).map((name) => {
             const Icon = icons[name];
             return (
               <button
@@ -497,7 +538,7 @@ export function Sportsdesk({
             );
           })}
           <span className="nav-label">YOUR DESK</span>
-          {sections.slice(7).map((name) => {
+          {sections.slice(10).map((name) => {
             const Icon = icons[name];
             return (
               <button
@@ -587,7 +628,7 @@ export function Sportsdesk({
             <div>
               <div className="eyebrow">
                 <span className="accent-text">
-                  THE SPORTS INTELLIGENCE WORKSPACE
+                  THE ORACULAR RESEARCH WORKSPACE
                 </span>
                 <span className="heading-slash">/</span>
                 {when(`${date}T12:00:00-04:00`, {
@@ -607,29 +648,33 @@ export function Sportsdesk({
             </button>
           </div>
           <div className="desk-toolbar">
-            <div className="sport-tabs" aria-label="Filter by sport">
-              {["All sports", ...Object.keys(LEAGUES)].map((l) => (
-                <button
-                  key={l}
-                  className={league === l ? "active" : ""}
-                  onClick={() => setLeague(l)}
-                >
-                  {l === "All sports" ? (
-                    <LayoutDashboard size={14} />
-                  ) : (
-                    <span className="sport-symbol">{leagueIcons[l]}</span>
-                  )}
-                  {l}
-                  <span className="tab-count">
-                    {
-                      board.games.filter(
-                        (g) => l === "All sports" || g.league === l,
-                      ).length
-                    }
-                  </span>
-                </button>
-              ))}
-            </div>
+            {!["Weather markets", "Election desk", "Top outcomes"].includes(
+              view,
+            ) && (
+              <div className="sport-tabs" aria-label="Filter by sport">
+                {["All sports", ...Object.keys(LEAGUES)].map((l) => (
+                  <button
+                    key={l}
+                    className={league === l ? "active" : ""}
+                    onClick={() => setLeague(l)}
+                  >
+                    {l === "All sports" ? (
+                      <LayoutDashboard size={14} />
+                    ) : (
+                      <span className="sport-symbol">{leagueIcons[l]}</span>
+                    )}
+                    {l}
+                    <span className="tab-count">
+                      {
+                        board.games.filter(
+                          (g) => l === "All sports" || g.league === l,
+                        ).length
+                      }
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
             <div className="toolbar-controls">
               <label className="mode-control">
                 <span className="sr-only">Data source</span>
@@ -646,16 +691,19 @@ export function Sportsdesk({
                 </select>
                 <ChevronDown size={12} />
               </label>
-              <input
-                className="date-input"
-                type="date"
-                aria-label="Slate date"
-                value={date}
-                disabled={busy}
-                onChange={(e) => {
-                  if (e.target.value) void refresh(board.mode, e.target.value);
-                }}
-              />
+              {!["Weather markets", "Election desk"].includes(view) && (
+                <input
+                  className="date-input"
+                  type="date"
+                  aria-label="Slate date"
+                  value={date}
+                  disabled={busy}
+                  onChange={(e) => {
+                    if (e.target.value)
+                      void refresh(board.mode, e.target.value);
+                  }}
+                />
+              )}
               <button
                 className="icon-button refresh-button"
                 disabled={busy}
@@ -1082,6 +1130,18 @@ export function Sportsdesk({
             </div>
           )}
 
+          {view === "Weather markets" && (
+            <WeatherDesk mode={board.mode} initialDate={date} />
+          )}
+          {view === "Election desk" && <ElectionDesk mode={board.mode} />}
+          {view === "Top outcomes" && (
+            <OutcomeRankings
+              mode={board.mode}
+              date={date}
+              onNavigate={navigate}
+            />
+          )}
+
           {view === "Decision lab" && (
             <DecisionLab board={board} games={visible} onOpen={openGame} />
           )}
@@ -1306,7 +1366,7 @@ export function Sportsdesk({
                       className="secondary"
                       onClick={() =>
                         download(
-                          "sportsdesk-watchlist.json",
+                          "oracular-watchlist.json",
                           JSON.stringify(saved, null, 2),
                         )
                       }
@@ -1404,13 +1464,12 @@ export function Sportsdesk({
           {view === "Methodology" && <Methodology />}
           <footer className="workspace-footer">
             <span>
-              <span className="brand-mini">s</span>Built for a better-informed
-              game.
+              <span className="brand-mini">o</span>Built for clearer decisions.
             </span>
             <span>
               {board.mode === "demo"
                 ? "Illustrative data"
-                : "Public sports data · may be delayed"}
+                : "Public data · may be delayed"}
               <span className="footer-dot">·</span>Research only
               <span className="footer-dot">·</span>v0.1.0
             </span>
@@ -1426,7 +1485,7 @@ export function Sportsdesk({
       >
         <div className="dialog-topbar">
           <span>
-            <span className="brand-mini">s</span> SPORTS DESK / RESEARCH PACKET
+            <span className="brand-mini">o</span> ORACULAR / SPORTS RESEARCH
           </span>
           <div>
             {selected && (
@@ -1496,7 +1555,7 @@ export function Sportsdesk({
           <button
             className="primary"
             onClick={() =>
-              download(`sportsdesk-brief-${date}.txt`, briefText, "text/plain")
+              download(`oracular-brief-${date}.txt`, briefText, "text/plain")
             }
           >
             <ArrowDownToLine size={15} />
@@ -1701,7 +1760,7 @@ function TeamsTable({
   ) : (
     <Empty
       title="Standings unavailable for this view"
-      text="Try another sport or date. Sportsdesk uses scoreboard records when detailed standings are missing."
+      text="Try another sport or date. Oracular uses scoreboard records when detailed standings are missing."
     />
   );
 }
@@ -1710,14 +1769,14 @@ function Methodology() {
     <div className="methodology">
       <section className="method-hero">
         <span className="method-symbol">✳</span>
-        <span className="eyebrow">THE SPORTSDESK APPROACH</span>
+        <span className="eyebrow">THE ORACULAR APPROACH</span>
         <h2>
           Understand the game.
           <br />
           <span className="accent-text">Then question the price.</span>
         </h2>
         <p>
-          Sportsdesk turns sports data into an inspectable research packet. A
+          Oracular turns sports data into an inspectable research packet. A
           predicted winner and a worthwhile market price are separate questions.
         </p>
       </section>

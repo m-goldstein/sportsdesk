@@ -41,7 +41,7 @@ test("a scenario can be stress-tested, shared, exported, locked and scored acros
   await page.getByRole("button", { name: "Thesis card", exact: true }).click();
   const file = await download;
   await file.saveAs("test-results/decision-lab-thesis-card.svg");
-  expect(file.suggestedFilename()).toBe("sportsdesk-NYK-BOS-thesis.svg");
+  expect(file.suggestedFilename()).toBe("oracular-NYK-BOS-thesis.svg");
   const svg = await readFile((await file.path())!, "utf8");
   expect(svg).toContain("&lt;script&gt;");
   expect(svg).not.toContain("<script>");

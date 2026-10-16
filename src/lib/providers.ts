@@ -50,7 +50,7 @@ async function read(url: string, ttl = 60): Promise<Wire> {
         data._sportsdeskFetchedAt = new Date().toISOString();
       return data;
     },
-    ["sportsdesk-providers-v1", url],
+    ["oracular-providers-v1", url],
     { revalidate: ttl },
   )();
 }

@@ -1,8 +1,8 @@
-# Sportsdesk
+# Oracular
 
-A standalone sports research workspace for betting and prediction markets. evidence-first workflow: **ingest → normalize → calculate → explain → compare prices → preserve the thesis**.
+A standalone prediction-market research workspace for sports, daily high temperatures, and U.S. elections. Its evidence-first workflow: **ingest → normalize → calculate → explain → compare prices → preserve the thesis**.
 
-Sportsdesk owns its source code, fonts, sample dataset, configuration, tests and production runtime.
+Oracular owns its source code, fonts, sample dataset, configuration, tests and production runtime.
 
 ## Run locally
 
@@ -26,6 +26,9 @@ npm start
 - **Live games:** scoreboard and game research, including provider live win probability when available. Live and completed games never receive a retrospective pregame forecast.
 - **Research packets:** inspect model factors, season records, recent results, comparison statistics, player leaders, current-game box scores, injuries, headlines, source links and retrieval timestamps. Export a JSON evidence packet.
 - **GPT analysis:** open a matchup's **GPT analysis** tab, inspect the input packet, then run on-demand GPT research. It assembles player, matchup, news, coaching, schedule, statistics and market evidence; enriches current context through cited web search; and generates a separate judgment with supporting evidence, counter-case, uncertainty and report exports. Sample mode demonstrates the workflow without an OpenAI call. See [the packet design deep dive](docs/gpt-analysis.md).
+- **Weather markets:** NOAA/NWS forecasts at nine contract settlement stations; exact-date Polymarket daily-high ladders; fresh CLOB depth and market-specific fees; adjustable forecast-error scenarios; YES/NO and complete-ladder arbitrage candidates; device-local paper wagers and exports. Real trading opens the external contract. No wallet, private key or order execution is integrated.
+- **Election desk:** eight 2026 governor races plus Georgia/North Carolina Senate races, live candidate contracts, on-demand cited original polling/news research, coverage-tone analysis and a transparent polling-model winner forecast. Incomplete evidence remains missing. Research uses the existing OpenAI key; free market tracking does not.
+- **Top outcomes:** top 10/20/100 across sports, weather and elections; rank by market consensus or independent likelihood; one leader per event, category filters, source coverage, price freshness and JSON exports. Model probabilities are uncalibrated and are not comparable measures of proven accuracy.
 - **Players / Teams:** research matchup leaders and availability; inspect current-season standings and scoring profiles.
 - **Tournaments:** official competition slate, provider tournament/postseason labels, venue and neutral-site context. The separate **Decision lab → Tournament lab** provides a clearly labeled hypothetical bracket sandbox.
 - **Markets:** compare independent model probabilities with moneyline prices from ESPN reference lines, The Odds API and exact-match Polymarket contracts. Includes no-vig probability, probability gap, freshness and a hypothetical decimal-odds EV calculator.
@@ -48,9 +51,9 @@ Keyboard: **Cmd/Ctrl+K** focuses search. Research dialogs trap focus through nat
 | [The Odds API](https://the-odds-api.com/liveapi/guides/v4/)                  | Two-outcome bookmaker moneylines                                                                   | Optional `ODDS_API_KEY` in `.env.local`. Server-side only; US region. Responses cached for five minutes to limit quota consumption.                                                                                                                                                             |
 | [Polymarket Gamma](https://docs.polymarket.com/market-data/discover-markets) | Public sports moneyline markets                                                                    | No key. Searches the latest 100 active sports events; coverage is partial. Requires exact full team outcomes, game start within four hours, and moneyline contract type. Props, spreads, futures and generic yes/no contracts are excluded. The public endpoint may be blocked in some regions. |
 
-Copy `.env.example` to `.env.local` when configuring a provider. Basic research and the daily brief work without an AI API. Live GPT analysis uses `OPENAI_API_KEY`; `OPENAI_MODEL` optionally overrides the default `gpt-6.1-sol`. Keys stay on the server. Web enrichment uses OpenAI's hosted search, so no additional search-service key is required.
+Copy `.env.example` to `.env.local` when configuring a provider. Basic research and the daily brief work without an AI API. Live GPT matchup and election analysis use `OPENAI_API_KEY`; `OPENAI_MODEL` optionally overrides the default `gpt-6.1-sol`. Keys stay on the server. Web enrichment uses OpenAI's hosted search, so no additional search-service key is required.
 
-Feeds may be delayed. Sportsdesk distinguishes retrieval time from provider quote update time. Missing or failed live data remains missing; it never silently falls back to sample data. ESPN calls cache for 60 seconds, standings for five minutes, and Polymarket for two minutes. Standings enrich only compatible current/future dates and matching season/type; historical dates use the scoreboard's records to avoid current-season leakage.
+Feeds may be delayed. Oracular distinguishes retrieval time from provider quote update time. Missing or failed live data remains missing; it never silently falls back to sample data. ESPN calls cache for 60 seconds, standings for five minutes, and Polymarket for two minutes. Standings enrich only compatible current/future dates and matching season/type; historical dates use the scoreboard's records to avoid current-season leakage.
 
 ## Forecasting v1
 
@@ -88,6 +91,10 @@ Research APIs:
 GET /api/board?date=2026-10-15&league=NBA&mode=live
 GET /api/research?league=NBA&id=<ESPN-event-id>
 GET /api/markets?league=NBA&id=<ESPN-event-id>&date=2026-10-15
+GET /api/weather?date=2026-10-16&city=all&mode=live
+GET /api/elections?mode=live
+POST /api/elections/analysis  # JSON { raceId, mode }; explicit on-demand research
+GET /api/rankings?date=2026-10-15&mode=live
 GET /api/analysis?league=NBA&id=<ESPN-event-id>&date=2026-10-15
 POST /api/analysis  # JSON { league, id, date }; streamed progress and report
 ```
@@ -113,13 +120,13 @@ The standalone check copies the production runtime and static assets into a temp
 
 Import this repository with the **Next.js** framework preset, repository root as the root directory, Node.js **22.x**, install command `npm ci`, and build command `npm run build`. Leave the output directory at the framework default.
 
-**Required for basic sports research: none. Required for live GPT analysis: `OPENAI_API_KEY`.**
+**Required for public sports, NOAA weather, live Polymarket feeds and rankings: none. Required for live GPT matchup/election research: `OPENAI_API_KEY`.**
 
-| Variable         | Purpose                                                    | Environments                                   |
-| ---------------- | ---------------------------------------------------------- | ---------------------------------------------- |
-| `OPENAI_API_KEY` | GPT matchup judgments and cited news/coaching web research | Production, and Preview/Development if desired |
-| `OPENAI_MODEL`   | Optional model override; defaults to `gpt-6.1-sol`         | Same environments as the key                   |
-| `ODDS_API_KEY`   | Timestamped bookmaker moneylines from The Odds API         | Production, and Preview/Development if desired |
+| Variable         | Purpose                                                                    | Environments                                   |
+| ---------------- | -------------------------------------------------------------------------- | ---------------------------------------------- |
+| `OPENAI_API_KEY` | GPT matchup judgments, election polling/news research and cited web search | Production, and Preview/Development if desired |
+| `OPENAI_MODEL`   | Optional model override; defaults to `gpt-6.1-sol`                         | Same environments as the key                   |
+| `ODDS_API_KEY`   | Timestamped bookmaker moneylines from The Odds API                         | Production, and Preview/Development if desired |
 
 Set these in Vercel's project **Settings → Environment Variables**, keep secrets server-only (no `NEXT_PUBLIC_` prefix), then redeploy for changes to apply. No `AUTH_*`, database, ESPN or Polymarket credentials are required. No sign-in is required to run GPT analysis. Sports-data and recent analysis caches reduce repeat requests; GPT/web-search usage is billed to the configured OpenAI API project.
 
@@ -130,10 +137,14 @@ The application has no authentication gate. To make a deployment itself accessib
 The Next.js build produces a standalone Node server. Deploy to a Node 22+ host, a Next.js-compatible hosting platform, or use the included Dockerfile:
 
 ```bash
-docker build -t sportsdesk .
-docker run --rm -p 3000:3000 --env-file .env.local sportsdesk
+docker build -t oracular .
+docker run --rm -p 3000:3000 --env-file .env.local oracular
 ```
 
 Omit `--env-file` when using only public feeds. No deployment or provider purchase is needed for local use.
 
 DM Sans and Manrope are bundled locally under the SIL Open Font License; their notices are in `src/app/fonts/`. Team identity marks are rendered from text and colors; no reference-repository artwork is used.
+
+## Oracular multi-market desk
+
+See [the multi-market design and source contracts](docs/multi-market-desk.md) for station matching, local-day coverage, fee/depth checks, polling eligibility and ranking semantics. A [hackathon presentation script](docs/demo-script.md) walks through the complete product. The product is branded Oracular; the existing GitHub repository and legacy browser storage keys remain compatible so existing saved research is retained.

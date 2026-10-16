@@ -292,7 +292,7 @@ export function GptAnalysis({
           </div>
           <div className="gpt-comparison">
             <span>
-              Sportsdesk home baseline <b>{pct(packet!.baseline.home, 1)}</b>
+              Oracular home baseline <b>{pct(packet!.baseline.home, 1)}</b>
             </span>
             <span>
               GPT home estimate <b>{pct(judgment.homeWinProbability, 1)}</b>
@@ -382,7 +382,7 @@ export function GptAnalysis({
               className="secondary"
               onClick={() =>
                 download(
-                  `sportsdesk-gpt-${game.id}.json`,
+                  `oracular-gpt-${game.id}.json`,
                   JSON.stringify(result, null, 2),
                 )
               }
@@ -422,7 +422,7 @@ export function GptAnalysis({
                 className="secondary"
                 onClick={() =>
                   download(
-                    `sportsdesk-input-${game.id}.json`,
+                    `oracular-input-${game.id}.json`,
                     JSON.stringify(packet, null, 2),
                   )
                 }

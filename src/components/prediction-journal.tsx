@@ -115,7 +115,7 @@ export function PredictionJournal({
             className="secondary"
             onClick={() =>
               download(
-                "sportsdesk-prediction-journal.json",
+                "oracular-prediction-journal.json",
                 JSON.stringify(
                   {
                     version: 1,

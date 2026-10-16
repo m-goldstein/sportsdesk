@@ -257,7 +257,7 @@ export async function getTeamContext(
       return normalizeTeamContext(raw, game, side);
     },
     [
-      "sportsdesk-team-context-v1",
+      "oracular-team-context-v1",
       game.league,
       id,
       String(year),

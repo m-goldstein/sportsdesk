@@ -285,7 +285,7 @@ export function demoBoard(date = "2026-10-15"): Board {
       },
     ],
     source: {
-      name: "Sportsdesk sample dataset",
+      name: "Oracular sample dataset",
       url: "",
       fetchedAt: timestamp,
       note: "All matchups, statistics, records, player availability and prices are illustrative.",

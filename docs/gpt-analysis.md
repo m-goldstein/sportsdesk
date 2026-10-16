@@ -1,14 +1,14 @@
 # GPT matchup research: packet design and implementation
 
-Sportsdesk now answers two separate questions: **which side has the stronger sports case, and does the available price support further market research?** GPT reviews an inspectable evidence packet. It does not replace the baseline, fabricate missing data, or turn a likely winner into an automatic bet.
+Oracular now answers two separate questions: **which side has the stronger sports case, and does the available price support further market research?** GPT reviews an inspectable evidence packet. It does not replace the baseline, fabricate missing data, or turn a likely winner into an automatic bet.
 
 ## Why the packet comes first
 
-A sports prediction can look persuasive while using the wrong season, a stale injury report, an unconfirmed starting lineup, or information published after the event. Research on deployable sports models emphasizes when inputs become available and whether evaluation reflects real future use. Sportsdesk therefore records event state, retrieval times, publication times when available, sample scope, missing fields, and the precise evidence supplied to the model. A future improvement is immutable pre-event storage and prospective calibration; this implementation does not claim a backtested edge. See the [task-specific systematic review](https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2026.1920214/full) and [review of team-sport prediction research](https://arxiv.org/abs/1912.11762).
+A sports prediction can look persuasive while using the wrong season, a stale injury report, an unconfirmed starting lineup, or information published after the event. Research on deployable sports models emphasizes when inputs become available and whether evaluation reflects real future use. Oracular therefore records event state, retrieval times, publication times when available, sample scope, missing fields, and the precise evidence supplied to the model. A future improvement is immutable pre-event storage and prospective calibration; this implementation does not claim a backtested edge. See the [task-specific systematic review](https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2026.1920214/full) and [review of team-sport prediction research](https://arxiv.org/abs/1912.11762).
 
 The NBA distinguishes pace from possession-adjusted ratings; raw scoring averages remain separate from efficiency measures. [NBA glossary](https://www.nba.com/stats/help/glossary)
 
-MLB's xwOBA uses contact-quality inputs; Sportsdesk requires sourced values rather than inferring them from ordinary box-score totals. [MLB glossary](https://www.mlb.com/glossary/statcast/expected-woba)
+MLB's xwOBA uses contact-quality inputs; Oracular requires sourced values rather than inferring them from ordinary box-score totals. [MLB glossary](https://www.mlb.com/glossary/statcast/expected-woba)
 
 ## Implemented workflow
 

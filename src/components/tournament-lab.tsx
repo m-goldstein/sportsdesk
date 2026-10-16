@@ -95,7 +95,7 @@ function Bracket({
           className="secondary"
           onClick={() =>
             download(
-              "sportsdesk-bracket.json",
+              "oracular-bracket.json",
               JSON.stringify(
                 {
                   version: 1,

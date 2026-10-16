@@ -1,0 +1,1042 @@
+.market-desk {
+  --market-blue: #88b0ff;
+}
+.market-hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 30px;
+  border: 1px solid #345a73;
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 5% 100%, #17465d88, transparent 70%),
+    linear-gradient(115deg, #142c40, #121e32);
+}
+.market-hero-symbol {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #397389;
+  border-radius: 16px;
+  background: #173c50;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.market-hero h2 {
+  font-size: 28px;
+  letter-spacing: -0.9px;
+  line-height: 1.3;
+  margin: 10px 0;
+}
+.market-hero p {
+  font-size: 12px;
+  color: #adc3d5;
+  line-height: 1.8;
+}
+.market-hero > .pill {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.market-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  margin: 24px 0;
+}
+.market-controls label,
+.market-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.market-controls input,
+.market-controls select {
+  padding: 11px 13px;
+  font-size: 12px;
+  background: var(--panel-light);
+  border-color: var(--line);
+  min-height: 39px;
+}
+.market-controls .secondary {
+  font-size: 11px;
+  min-height: 39px;
+}
+.market-control-note {
+  font-size: 10px;
+  color: var(--muted);
+  max-width: 280px;
+  line-height: 1.9;
+  margin-left: auto;
+}
+.market-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.market-metrics > div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 21px;
+}
+.market-metrics small {
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  display: block;
+}
+.market-metrics strong {
+  font-size: 32px;
+  display: block;
+  margin: 12px 0;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.market-metrics span {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.market-assumptions {
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.market-assumptions summary {
+  font-size: 12px;
+  color: #c9dbe6;
+  cursor: pointer;
+}
+.market-settings {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin: 22px 0 16px;
+}
+.market-settings input {
+  width: 100%;
+  padding: 10px;
+  background: #0e1c2d;
+}
+.market-assumptions p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.market-loading {
+  padding: 45px;
+  text-align: center;
+  color: var(--muted);
+}
+.market-loading .spinner {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.market-loading h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin: 8px 0;
+}
+.market-loading p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+.weather-city-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  margin: 24px 0;
+}
+.weather-city {
+  padding: 20px;
+  text-align: left;
+  border: 1px solid var(--line);
+}
+.weather-city.selected {
+  border-color: #4c9aab;
+  background: linear-gradient(120deg, #163447, #15253a);
+}
+.weather-city-name {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.weather-city-name small {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  color: #8fb4cc;
+}
+.weather-city > strong {
+  display: block;
+  font-size: 38px;
+  color: var(--accent);
+  margin: 15px 0;
+  font-variant-numeric: tabular-nums;
+}
+.weather-city > strong small {
+  font-size: 9px;
+  margin-left: 10px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.weather-city-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.weather-city-meta > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+}
+.weather-city-meta > small {
+  font-size: 8px;
+}
+.weather-detail,
+.weather-arbitrage,
+.weather-paper,
+.election-overview,
+.election-research,
+.election-method,
+.ranking-table-panel {
+  padding: 25px;
+  margin: 20px 0;
+  min-width: 0;
+}
+.market-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.market-section-heading h2 {
+  font-size: 21px;
+  margin: 10px 0 8px;
+  line-height: 1.4;
+}
+.market-section-heading p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 700px;
+}
+.market-section-heading > .secondary,
+.market-section-heading > .primary {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.weather-forecast-strip {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  padding: 18px 20px;
+  background: #10273a;
+  border: 1px solid #2c4c64;
+  border-radius: 8px;
+}
+.weather-forecast-strip > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+}
+.weather-forecast-strip strong {
+  font-size: 28px;
+  white-space: nowrap;
+}
+.weather-forecast-strip span {
+  font-size: 10px;
+  max-width: 80px;
+  line-height: 1.7;
+}
+.weather-forecast-strip p {
+  font-size: 10px;
+  line-height: 2;
+  color: var(--muted);
+  margin-left: auto;
+}
+.weather-curve {
+  display: block;
+  width: 100%;
+  max-height: 190px;
+  margin-top: 20px;
+}
+.weather-curve text {
+  font-size: 11px;
+  fill: var(--muted);
+}
+.market-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 10px;
+  margin: 10px 0 22px;
+  color: var(--accent);
+}
+.weather-contract-table {
+  min-width: 880px;
+}
+.weather-contract-table th {
+  font-size: 9px;
+}
+.weather-contract-table td {
+  font-size: 11px;
+}
+.weather-contract-table small {
+  font-size: 8px;
+  line-height: 1.8;
+}
+.weather-ticket-buttons {
+  display: flex;
+  gap: 6px;
+}
+.weather-ticket-buttons button {
+  font-size: 9px;
+  padding: 8px 9px;
+  white-space: nowrap;
+}
+.market-rules {
+  padding: 17px 0 0;
+  margin-top: 17px;
+  border-top: 1px solid var(--line);
+  font-size: 10px;
+  color: var(--muted);
+}
+.market-rules summary {
+  cursor: pointer;
+  color: #b8cdda;
+}
+.market-rules p {
+  font-size: 10px;
+  line-height: 1.9;
+  margin-top: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.weather-arb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+.weather-arb-card {
+  padding: 20px;
+  background: #153041;
+  border: 1px solid #346575;
+  border-radius: 9px;
+}
+.weather-arb-card .eyebrow {
+  font-size: 8px;
+}
+.weather-arb-card h3 {
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.weather-arb-card > strong {
+  font-size: 30px;
+  color: var(--accent);
+  display: block;
+}
+.weather-arb-card > strong small {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  margin-top: 7px;
+}
+.weather-arb-card p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-top: 14px;
+}
+.weather-arb-card details {
+  font-size: 10px;
+  margin-top: 16px;
+}
+.weather-arb-card summary {
+  cursor: pointer;
+  color: #b7cbdc;
+}
+.weather-paper .section-note svg {
+  margin-right: 7px;
+  color: var(--accent);
+}
+.election-layout {
+  display: grid;
+  grid-template-columns: 235px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.election-race-list {
+  padding: 20px 0 0;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.election-race-list > .eyebrow {
+  display: block;
+  padding: 0 18px 20px;
+  font-size: 9px;
+}
+.election-race-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  padding: 17px 18px;
+  text-align: left;
+  border-top: 1px solid var(--line);
+  border-left: 2px solid transparent;
+}
+.election-race-list button.selected {
+  background: #183346;
+  border-left-color: var(--accent);
+}
+.election-race-list button > span {
+  font-size: 12px;
+}
+.election-race-list small {
+  display: block;
+  font-size: 8px;
+  margin-top: 7px;
+  line-height: 1.6;
+}
+.election-race-list strong {
+  font-size: 18px;
+  color: var(--accent);
+  text-align: right;
+}
+.election-race-list strong small {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 8px;
+}
+.election-content {
+  min-width: 0;
+}
+.election-candidate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 13px;
+  margin: 20px 0;
+}
+.election-candidate {
+  padding: 20px;
+  background: #101e31;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.election-candidate .eyebrow {
+  font-size: 7px;
+}
+.election-candidate h3 {
+  margin: 12px 0 18px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.election-candidate > div > strong {
+  font-size: 33px;
+  color: var(--accent);
+}
+.election-candidate > div > span {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 8px;
+}
+.election-candidate p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 2;
+  margin: 16px 0;
+}
+.election-candidate p b {
+  color: #c7dce9;
+  font-weight: 500;
+}
+.election-candidate > small {
+  font-size: 8px;
+  line-height: 1.9;
+}
+.election-prob-bar {
+  height: 4px;
+  background: #293c51;
+  border-radius: 3px;
+  margin-top: 17px;
+}
+.election-prob-bar > span {
+  height: 100%;
+  background: var(--accent);
+  margin-top: 0 !important;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.election-report-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0 17px;
+}
+.election-report-heading > span {
+  font-size: 9px;
+  color: var(--muted);
+}
+.election-report-heading button {
+  font-size: 10px;
+  margin-left: auto;
+}
+.election-summary {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #c3d5e4;
+}
+.election-sentiment-toggle,
+.ranking-dedupe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 1.9;
+  color: #b9ccde;
+  margin: 22px 0 12px;
+}
+.election-sentiment-toggle input,
+.ranking-dedupe input {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+}
+.election-model-read {
+  padding: 18px 20px;
+  background: #143242;
+  border: 1px solid #336576;
+  border-radius: 9px;
+  margin: 20px 0;
+}
+.election-model-read strong {
+  color: var(--accent);
+  font-size: 15px;
+  margin-right: 6px;
+}
+.election-model-read > span {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.election-model-read > small {
+  display: block;
+  margin-top: 10px;
+  font-size: 9px;
+  line-height: 1.9;
+}
+.election-subheading {
+  font-size: 14px;
+  margin: 28px 0 16px;
+}
+.election-subheading svg {
+  color: var(--accent);
+  margin-right: 6px;
+}
+.election-poll-table th {
+  font-size: 9px;
+  white-space: normal;
+  min-width: 100px;
+}
+.election-poll-table td {
+  font-size: 10px;
+}
+.election-poll-table td small {
+  font-size: 8px;
+  line-height: 1.8;
+}
+.election-poll-table details {
+  font-size: 9px;
+  margin-top: 10px;
+}
+.election-poll-table summary {
+  cursor: pointer;
+}
+.election-poll-table details p {
+  max-width: 200px;
+  white-space: normal;
+  font-size: 9px;
+  line-height: 1.8;
+  margin-top: 8px;
+}
+.election-news-grid {
+  display: grid;
+  gap: 15px;
+}
+.election-news-grid > article {
+  background: #101e31;
+  border: 1px solid var(--line);
+  padding: 20px;
+  border-radius: 8px;
+}
+.election-news-grid h3 {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 9px 0;
+}
+.election-news-grid p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #b0c2d5;
+}
+.election-tone {
+  margin-top: 15px;
+}
+.election-tone > small {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  line-height: 1.9;
+}
+.election-evidence-gaps {
+  padding: 20px;
+  background: #17263b;
+  border-radius: 8px;
+  margin-top: 22px;
+}
+.election-evidence-gaps h3 {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.election-evidence-gaps p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-top: 7px;
+}
+.election-method h3 {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.election-method p {
+  font-size: 10px;
+  line-height: 2;
+  color: var(--muted);
+}
+.ranking-domain-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 24px 0;
+}
+.ranking-domain-summary > button {
+  padding: 23px;
+  text-align: left;
+}
+.ranking-domain-summary > button > span {
+  font-size: 12px;
+  display: block;
+}
+.ranking-domain-summary strong {
+  display: block;
+  color: var(--accent);
+  font-size: 32px;
+  margin: 12px 0;
+}
+.ranking-domain-summary small {
+  font-size: 9px;
+}
+.ranking-table {
+  min-width: 1000px;
+}
+.ranking-table td {
+  font-size: 11px;
+}
+.ranking-table td:nth-child(2) {
+  min-width: 240px;
+  max-width: 310px;
+  white-space: normal;
+}
+.ranking-table td:nth-child(2) > strong {
+  display: block;
+  margin: 10px 0;
+  line-height: 1.7;
+  font-size: 12px;
+}
+.ranking-table td small {
+  display: block;
+  font-size: 8px;
+  line-height: 1.9;
+  max-width: 180px;
+  white-space: normal;
+}
+.ranking-table td:last-child {
+  max-width: 190px;
+  white-space: normal;
+  line-height: 1.8;
+  font-size: 10px;
+}
+.ranking-place {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.ranking-place.podium {
+  color: var(--accent);
+  border-color: #3a7583;
+  background: #193a49;
+}
+.ranking-domain {
+  font-size: 8px;
+}
+.ranking-domain.weather {
+  background: #18394a;
+  color: #8fdfec;
+}
+.ranking-domain.elections {
+  background: #253254;
+  color: #a9bcf7;
+}
+.ranking-domain.sports {
+  background: #203b4b;
+  color: #a3d3eb;
+}
+.ranking-probability {
+  font-size: 21px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.ranking-mini-bar {
+  width: 100px;
+  height: 3px;
+  background: #293b51;
+  margin-top: 9px;
+  border-radius: 2px;
+}
+.ranking-mini-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+.ranking-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 22px 0;
+}
+.ranking-links button {
+  font-size: 11px;
+}
+@media (max-width: 1200px) {
+  .market-hero h2 {
+    font-size: 24px;
+  }
+  .market-hero {
+    padding: 25px;
+    gap: 20px;
+  }
+  .market-hero-symbol {
+    width: 52px;
+    height: 52px;
+  }
+  .market-settings {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .market-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .weather-city-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .weather-arb-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .election-layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .market-section-heading {
+    flex-wrap: wrap;
+  }
+  .election-race-list button {
+    padding: 16px 13px;
+  }
+  .weather-city {
+    padding: 17px;
+  }
+  .weather-city-name {
+    font-size: 12px;
+  }
+}
+@media (max-width: 950px) {
+  .election-layout {
+    grid-template-columns: 1fr;
+  }
+  .election-race-list {
+    display: flex;
+    overflow-x: auto;
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .election-race-list > .eyebrow {
+    display: none;
+  }
+  .election-race-list button {
+    min-width: 190px;
+    gap: 20px;
+    border-left: 0;
+    border-top: 2px solid transparent;
+  }
+  .election-race-list button.selected {
+    border-top-color: var(--accent);
+  }
+  .weather-city-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .weather-forecast-strip {
+    flex-wrap: wrap;
+  }
+  .weather-forecast-strip p {
+    margin-left: 0;
+  }
+  .market-control-note {
+    margin-left: 0;
+  }
+  .election-overview {
+    margin-top: 0;
+  }
+}
+@media (max-width: 600px) {
+  .market-hero {
+    padding: 22px;
+    gap: 15px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .market-hero-symbol {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+  .market-hero-symbol svg {
+    width: 26px;
+    height: 26px;
+  }
+  .market-hero > div {
+    flex: 1;
+    min-width: 200px;
+  }
+  .market-hero > .pill {
+    margin-left: 0;
+  }
+  .market-hero h2 {
+    font-size: 25px;
+  }
+  .market-hero p {
+    font-size: 11px;
+  }
+  .market-controls {
+    gap: 12px;
+  }
+  .market-controls label {
+    flex: 1;
+    min-width: 130px;
+  }
+  .market-controls input,
+  .market-controls select {
+    width: 100%;
+  }
+  .market-controls .secondary {
+    font-size: 10px;
+  }
+  .market-metrics {
+    gap: 10px;
+  }
+  .market-metrics > div {
+    padding: 16px;
+  }
+  .market-metrics small {
+    font-size: 7px;
+    line-height: 1.8;
+  }
+  .market-metrics strong {
+    font-size: 29px;
+  }
+  .market-metrics span {
+    font-size: 8px;
+  }
+  .market-assumptions {
+    padding: 18px;
+  }
+  .market-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .market-settings label {
+    font-size: 9px;
+  }
+  .market-settings label:last-child {
+    grid-column: 1/-1;
+  }
+  .market-assumptions p {
+    font-size: 9px;
+  }
+  .weather-city-grid {
+    gap: 10px;
+  }
+  .weather-city {
+    padding: 15px;
+  }
+  .weather-city-name {
+    flex-direction: column;
+    font-size: 12px;
+    gap: 6px;
+  }
+  .weather-city > strong {
+    font-size: 33px;
+  }
+  .weather-city > strong small {
+    display: block;
+    margin: 6px 0 0;
+    font-size: 8px;
+  }
+  .weather-city-meta > span {
+    font-size: 8px;
+  }
+  .weather-city-meta > small {
+    font-size: 7px;
+  }
+  .weather-detail,
+  .weather-arbitrage,
+  .weather-paper,
+  .election-overview,
+  .election-research,
+  .election-method,
+  .ranking-table-panel {
+    padding: 19px;
+  }
+  .market-section-heading {
+    gap: 15px;
+  }
+  .market-section-heading h2 {
+    font-size: 20px;
+  }
+  .market-section-heading p {
+    font-size: 10px;
+  }
+  .market-section-heading > .primary,
+  .market-section-heading > .secondary {
+    font-size: 10px;
+  }
+  .weather-arb-grid {
+    grid-template-columns: 1fr;
+  }
+  .weather-forecast-strip {
+    padding: 15px;
+    gap: 12px;
+  }
+  .weather-forecast-strip p {
+    font-size: 9px;
+  }
+  .weather-forecast-strip strong {
+    font-size: 27px;
+  }
+  .market-source-links {
+    gap: 13px;
+    font-size: 9px;
+  }
+  .weather-curve {
+    min-height: 90px;
+  }
+  .election-candidate-grid {
+    grid-template-columns: 1fr;
+  }
+  .election-candidate {
+    padding: 18px;
+  }
+  .election-candidate h3 {
+    font-size: 16px;
+  }
+  .election-report-heading {
+    gap: 10px;
+  }
+  .election-report-heading button {
+    margin-left: 0;
+  }
+  .election-summary {
+    font-size: 12px;
+  }
+  .election-sentiment-toggle {
+    align-items: flex-start;
+    font-size: 10px;
+  }
+  .election-sentiment-toggle input {
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .ranking-domain-summary {
+    gap: 10px;
+  }
+  .ranking-domain-summary > button {
+    padding: 15px;
+  }
+  .ranking-domain-summary > button > span {
+    font-size: 10px;
+  }
+  .ranking-domain-summary strong {
+    font-size: 28px;
+  }
+  .ranking-domain-summary small {
+    font-size: 8px;
+    line-height: 1.8;
+    display: block;
+  }
+  .ranking-links {
+    gap: 10px;
+  }
+  .ranking-links button {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .election-prob-bar > span {
+    transition: none;
+  }
+}
+.brand-mark {
+  transform: none;
+  font-style: normal;
+}
+.brand-mark::after {
+  display: none;
+}
+.brand-mark svg {
+  width: 26px;
+  height: 26px;
+}
+.sidebar {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #2b455c transparent;
+}
+.sidebar > * {
+  flex-shrink: 0;
+}
+@media (max-height: 950px) {
+  .sidebar .desk-note {
+    display: none;
+  }
+  .sidebar-bottom {
+    padding-top: 18px;
+  }
+}

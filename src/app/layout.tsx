@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./markets.css";
 const sans = localFont({
   src: "./fonts/dm-sans.woff2",
   variable: "--font-sans",
@@ -12,9 +13,9 @@ const display = localFont({
   display: "swap",
 });
 export const metadata: Metadata = {
-  title: "Sportsdesk — Read the game. Find your edge.",
+  title: "Oracular — Read the signals. See what comes next.",
   description:
-    "An evidence-first research desk for sports, betting and prediction markets. Explore matchups, team form, player availability and market probabilities.",
+    "Research sports, daily temperatures and elections with evidence-led forecasts, live prediction markets and transparent probability models.",
 };
 export default function RootLayout({
   children,

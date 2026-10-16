@@ -255,7 +255,7 @@ export function ResearchPanel({
           className="export-button"
           onClick={() =>
             download(
-              `sportsdesk-${game.id}.json`,
+              `oracular-${game.id}.json`,
               JSON.stringify(
                 {
                   game,
@@ -338,7 +338,7 @@ export function ResearchPanel({
                   <b className="accent-text">
                     {pct(research?.liveHomeProbability ?? null, 1)}
                   </b>
-                  . Separate from the Sportsdesk pregame model.
+                  . Separate from the Oracular pregame model.
                 </p>
               )}
               <span className="quality">
@@ -576,7 +576,7 @@ export function ResearchPanel({
             </p>
           ))}
           <p className="section-note">
-            Sportsdesk baseline v1 uses season records, season scoring
+            Oracular baseline v1 uses season records, season scoring
             differential and venue. Probabilities have not been fitted or
             validated on historical outcomes. Market quotes are independent of
             the forecast. Live stats may be delayed.

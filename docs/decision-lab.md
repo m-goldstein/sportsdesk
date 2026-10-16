@@ -1,13 +1,13 @@
 # Decision lab
 
-Sportsdesk's hackathon story is **research → challenge the assumptions → explore the paths → record a prediction → measure it**. Decision lab adds an interactive layer to the existing cited GPT research without requiring another API, account, database or environment variable. All new calculations run locally. Final-score sync uses the existing public sports-data API.
+Oracular's hackathon story is **research → challenge the assumptions → explore the paths → record a prediction → measure it**. Decision lab adds an interactive layer to the existing cited GPT research without requiring another API, account, database or environment variable. All new calculations run locally. Final-score sync uses the existing public sports-data API.
 
 ## A three-minute demo
 
 1. Open `/?mode=demo&date=2026-10-15&view=Decision+lab` and choose **Demo walkthrough**. This sample is self-contained and clearly labeled throughout.
 2. In **Scenario studio**, start with Knicks at Celtics. Drag Boston's assumed margin impact down by six points. The central probability, fair odds, hypothetical EV range and sensitivity map update together. Expand the math disclosure to explain the transformation.
 3. Increase uncertainty to ±12 percentage points. Show how a favorable central estimate can cross the hypothetical price's break-even point. Click a heatmap cell to explore a different assumption pair. These are user assumptions, not measured injury effects.
-4. Write a thesis and download the **Thesis card**. It is a standalone 1200×630 SVG in Sportsdesk's blue/aqua theme. **Share scenario** copies a link containing the matchup, start time, source mode, date and numeric assumptions. A recipient sees the same assumptions evaluated against the currently available team snapshot, not an immutable forecast.
+4. Write a thesis and download the **Thesis card**. It is a standalone 1200×630 SVG in Oracular's blue/aqua theme. **Share scenario** copies a link containing the matchup, start time, source mode, date and numeric assumptions. A recipient sees the same assumptions evaluated against the currently available team snapshot, not an immutable forecast.
 5. **Lock prediction** freezes that probability, the original baseline, source snapshot and written reason. In the sample journal, choose a simulated winner. The Brier score and calibration point appear immediately. Reload to show persistence. Export the journal for a portable record.
 6. Open **Tournament lab**. The sample NBA field contains eight teams. Swap two bracket slots and watch exact championship odds change; then **Play another universe** to reveal a possible elimination path. Export the field, advancement probabilities and seeded outcome.
 7. Explain how live mode works: research real teams through the existing GPT packet, form a scenario, lock before kickoff, and later **Sync final scores**. Samples remain in a separate view and do not contribute to real-game scoring.

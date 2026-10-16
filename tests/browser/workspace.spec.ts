@@ -41,7 +41,7 @@ test("research, market comparison, saved notes, refresh and exports form a compl
   const download = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export watchlist" }).click();
   expect((await download).suggestedFilename()).toBe(
-    "sportsdesk-watchlist.json",
+    "oracular-watchlist.json",
   );
   await page.getByRole("button", { name: "Build daily brief" }).click();
   await expect(
@@ -92,7 +92,7 @@ test("sport and status filters, empty states and mobile layout remain usable", a
     ),
   ).toBe(true);
   await page.screenshot({
-    path: "test-results/sportsdesk-mobile.png",
+    path: "test-results/oracular-mobile.png",
     fullPage: true,
   });
 });
